@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+{% for postAll in all_post %}<article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+          <div class="media">
+              <img style="width: 70px;height: 70px; border-radius: 50px; "
+                src="{{postAll.author.profile.image.url}}">
+              <div class="media-body">
+                <h2 style="margin: 20px; font-style: italic;"> {{postAll.author}} </h2><small class="text-muted">{{ postAll.posted_date }}</small>
+              </div>
+            </div>
+  
+  
+           
+      </div>
+      <h2 class="article-title">{{ postAll.title }}</h2>
+      <p> {{postAll.content}}  </p>
+      <p><a class="new-title" href="{% url 'post-detail' postAll.id %}">SURATY BILEN...</a></p>
+    </div>
+   
+    
+  </article>
+  
+        
+{% endfor %}
+
+
+
+
+
+
+<div class="pagination">
+  <span class="step-links">
+      {% if all_post.has_previous %}
+          <a href="?page=1" class="btn btn-outline-info mb-4"> Birinji</a>
+          <a href="?page={{ all_post.previous_page_number}}" class="btn btn-outline-info mb-4">Yza</a>
+      {% endif %}
+
+      <span class="current">
+          Sahypa {{ all_post.number }}-den {{ all_post.paginator.num_pages }} cenli.
+      </span>
+
+      {% if all_post.has_next %}
+          <a href="?page={{ all_post.next_page_number }} " class="btn btn-outline-info mb-4">Indiki</a>
+          <a href="?page={{ all_post.paginator.num_pages }}" class="btn btn-outline-info mb-4">Sonky</a>
+      {% endif %}
+  </span>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+

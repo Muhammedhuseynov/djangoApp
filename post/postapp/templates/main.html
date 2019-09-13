@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="{% static 'bootstraps\css\bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'mainn.css' %}">
+    
+    <title>Wakaler</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top nav-costum">
+  <a class="navbar-brand" href="{% url 'home' %}">-- M.H --</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">WAKALAR <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'comment' %}"> Sayt Barada Pikirler <span class="sr-only">(current)</span></a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'profile' %}">MEN WAKAM</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">GOSHUL BIZE!</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">GOSHULDYM!</a>
+      </li>
+      {% endif %}
+      <h4 class="tech" style="margin-left: 50px; color: blanchedalmond;">Waka</h4>
+    </ul>
+    <form class="form-inline mt-2 mt-md-0" method="GET">
+      <input class="form-control mr-sm-2" type="text" name="q" placeholder="Waka gozle..." aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">GOZLEG</button>
+    </form>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+  <main role="main" class="container">
+  {% if messages %}
+  {% for msg in messages %}
+  <h1> {{msg}} </h1>
+
+  {% endfor %}
+  {% endif %}
+    <div class="row">
+      <div class="col-md-8">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+      <script src="{% static 'bootstraps/js/bootstrap.bundle.min.js' %}" ></script>
+
+</body>
+</html>

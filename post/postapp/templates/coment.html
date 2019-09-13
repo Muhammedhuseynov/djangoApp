@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h2> Senem yaz Pikirini! </h2>
+{% if user.is_authenticated %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {% for fd in field %}
+    {{fd.label_tag.none}}
+    {{fd}}
+    <br>
+    <input class="btn btn-success btn-sm mt-1 mb-1 val" type="submit" value="Gosh+">
+
+    {% endfor %}
+    </form>
+
+{% endif %}
+
+
+{% for comment in comment %}<article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+          <div class="media">
+              <div class="media-body">
+                <h2 style="margin: 20px;color:red ; font-style: italic;"> {{comment.writer}} </h2><small class="text-muted">{{ postAll.posted_date }}</small>
+              </div>
+            </div>
+  
+  
+      </div>
+      <h2 class="article-title">  {{ comment.comment }}</h2>
+    </div>
+  </article>
+</form>
+{% endfor %}
+<div class="pagination">
+  <span class="step-links">
+      {% if comment.has_previous %}
+          <a href="?page=1" class="btn btn-outline-info mb-4">Birinji</a>
+          <a href="?page={{ comment.previous_page_number }}" class="btn btn-outline-info mb-4">Yza</a>
+      {% endif %}
+
+      <span class="current">
+          Sahypa {{ comment.number }}-den {{ comment.paginator.num_pages }} cenli.
+      </span>
+
+      {% if comment.has_next %}
+          <a href="?page={{ comment.next_page_number }}" class="btn btn-outline-info mb-4">Indiki</a>
+          <a href="?page={{ comment.paginator.num_pages }}" class="btn btn-outline-info mb-4">Sonky</a>
+      {% endif %}
+  </span>
+</div>
+{% endblock %}
